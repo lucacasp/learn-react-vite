@@ -5,6 +5,7 @@ import AboutPage from '../../src/pages/AboutPage/AboutPage'
 import ContactPage from '../../src/pages/ContactPage/ContactPage'
 import SinglePage from '../../src/pages/Homepage/SinglePage/SinglePage'
 import Layout from '../../src/components/Layout/Layout'
+import MyWorks from '../../src/pages/MyWorks/MyWorks'
 
 const PAGES = [
     {
@@ -26,6 +27,11 @@ const PAGES = [
         name: 'Image',
         path: '/image/:imageId',
         component: <SinglePage />
+    },
+    {
+        name: 'Latest Works',
+        path: '/latest-works',
+        component: <MyWorks />
     }
 ]
 

@@ -1,0 +1,49 @@
+.container-myworks-title {
+    h1 {
+        font-family: var(--code-font-primary);
+        font-weight: 400;
+        border: 10px solid var(--tertiary-color);
+        z-index: 100;
+        font-size: 2rem;
+        color: var(--color-primary);
+    }
+}
+
+.image-container {
+  position: relative;
+  display: block;
+  overflow: hidden;
+
+  .grid-image {
+    width: 100%;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .image-overlay {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    transition: bottom 0.3s ease;
+
+    h3 {
+      color: white;
+      margin: 0;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+  }
+
+  &:hover {
+    .image-overlay {
+      bottom: 0;
+    }
+    
+    .grid-image {
+      transform: scale(1.05);
+    }
+  }
+}

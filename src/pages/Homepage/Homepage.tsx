@@ -19,6 +19,7 @@ const Homepage = () => {
     ]
 
     return (
+        <>
         <div>
             <Masonry
                 breakpointCols={{
@@ -40,7 +41,14 @@ const Homepage = () => {
                     </Link>
                 ))}
             </Masonry>
+
+            <div className="latest-works">
+                <Link to="/latest-works">Ultimi lavori</Link>
+            </div>
         </div>
+       
+       
+        </>
     )
 }
 

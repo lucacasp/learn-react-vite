@@ -20,3 +20,45 @@
     margin-bottom: 30px; /* spazio tra le righe */
     width: 100%;
   }
+
+  .grid-image{
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    &:hover{
+        transform: scale(1.01);
+    }
+  }
+
+  .latest-works {
+    font-family: var(--code-font-primary);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-primary);
+    text-align: center;
+    margin-top: 5rem;
+    margin-bottom: 20px;
+
+    a {
+      position: relative;
+      text-decoration: none;
+      font-size: 1.5rem;
+      color: #000;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: -4px;
+        left: 50%;
+        background-color: #000;
+        transform: translateX(-50%) scaleX(0);
+        transform-origin: center;
+        transition: transform 0.3s ease-out;
+      }
+      
+      &:hover::after {
+        transform: translateX(-50%) scaleX(1);
+      }
+    }
+  }
