@@ -1,0 +1,22 @@
+.homepage {
+    font-family: var(--code-font-primary);
+}
+
+.my-masonry-grid {
+    display: flex;
+    width: auto;
+  }
+  
+  .my-masonry-grid_column {
+    padding-left: 30px; /* spazio tra le colonne */
+    background-clip: padding-box;
+
+    @media (max-width: 768px) {
+        padding-left: 0;
+    } 
+  }
+  
+  .my-masonry-grid_column > img {
+    margin-bottom: 30px; /* spazio tra le righe */
+    width: 100%;
+  }

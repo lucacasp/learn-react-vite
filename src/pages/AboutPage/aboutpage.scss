@@ -1,0 +1,30 @@
+.container-photo{
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+}
+
+.container-aboutpage{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .container-text{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: -400px;
+    left: 100px;
+
+    h1{
+        font-size: 20px;
+        font-style: italic;
+        font-family: var(--code-font-primary);
+        font-weight: 600;
+        color: var(--color-primary);
+    }
+    
+
+    }
+}

@@ -1,0 +1,33 @@
+.form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color, #ddd);
+        border-radius: 4px;
+        transition: border-color 0.2s ease;
+
+        &:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+    }
+
+    textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .error {
+        color: var(--error-color, #dc3545);
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+} 

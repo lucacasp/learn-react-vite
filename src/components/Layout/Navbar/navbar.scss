@@ -1,0 +1,45 @@
+.navbar {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f0f0f0;
+    position: relative;
+
+    font-family: var(--code-font-primary);
+
+    .hamburger-menu {
+        display: none;
+        cursor: pointer;
+        
+        @media (max-width: 768px) {
+            display: block;
+        }
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 1rem;
+        
+        @media (max-width: 768px) {
+            display: none;
+            
+            &.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1rem;
+            }
+        }
+    }
+}
+
+.navbar a {
+    margin-left: 10rem;
+    text-decoration: none;
+    color: #333;
+}

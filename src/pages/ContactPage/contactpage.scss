@@ -1,0 +1,60 @@
+@import '../../../common/css//scss/forms/form-buttons';
+
+.form-container {
+    display: flex;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+.form-container-side {
+    width: 50%;
+    height: 100%;
+    position: relative;
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+
+    & .form-container-side-title {
+        font-family: var(--code-font-primary);
+        font-size: 2rem;
+        font-weight: 700;
+        font-style: italic;
+        border: 10px solid var(--tertiary-color);
+        z-index: 100;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    & h1 {
+        color: var(--tertiary-color);
+        margin: 2rem;
+
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+}
+
+form {
+    margin-left: 2rem;
+    margin-top: 2rem;
+    width: 50%;
+    height: 100%;
+
+    font-family: var(--code-font-secondary);
+
+    @media (max-width: 768px) {
+        margin-left: 0;
+        width: 100%;
+    }
+}

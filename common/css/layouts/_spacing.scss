@@ -1,0 +1,18 @@
+$spacer: 1rem;
+
+.m-auto { margin: auto; }
+
+@for $i from 1 through 5 {
+  .m-#{$i} { margin: $spacer * $i; }
+  .p-#{$i} { padding: $spacer * $i; }
+  
+  .mx-#{$i} { 
+    margin-left: $spacer * $i;
+    margin-right: $spacer * $i;
+  }
+  
+  .my-#{$i} {
+    margin-top: $spacer * $i;
+    margin-bottom: $spacer * $i;
+  }
+} 

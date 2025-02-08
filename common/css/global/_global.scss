@@ -1,0 +1,108 @@
+// voglio creare un file global.scss che contenga tutti i colori e i font che uso nel progetto
+// e poi importarlo in tutti i file scss
+
+$primary-color: #000;
+$secondary-color: #6c757d;
+$tertiary-color: #FFF;
+$quaternary-color: #dc3545;
+$quinary-color: #ffc107;
+$senary-color: #17a2b8;
+$septenary-color: #6610f2;
+$octonary-color: #e83e8c;
+$nonary-color: #fd7e14;
+$denary-color: #128fde;
+
+$primary-font: 'Roboto', sans-serif;
+$secondary-font: 'Open Sans', sans-serif;
+$tertiary-font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$quaternary-font: 'Arial', sans-serif;
+$quinary-font: 'Verdana', sans-serif;
+$senary-font: 'Georgia', serif;
+$septenary-font: 'Times New Roman', Times, serif;
+$octonary-font: 'Palatino', Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
+$nonary-font: 'Bookman', Bookman L, serif;
+$denary-font: 'Comic Sans MS', Comic Sans, sans-serif;
+
+// Importa tutti i file partial
+@import 'mixins';
+@import 'reset';
+@import 'animations';
+@import 'utilities';
+
+// Importa i layout
+@import '../layouts/grid';
+@import '../layouts/containers';
+@import '../layouts/spacing';
+
+// Importa i componenti
+@import '../components/buttons';
+@import '../components/forms';
+
+// Importa gli stili di base
+@import '../base/typography';
+
+// Importa i font
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+// Aggiorna o aggiungi le variabili dei font
+$code-font-primary: 'Space Mono', monospace;
+$code-font-secondary: 'Roboto Mono', monospace;
+
+// Definisci le variabili CSS per uso globale
+:root {
+  // Colori
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --tertiary-color: #{$tertiary-color};
+  // ... altri colori
+  
+  // Font
+  --primary-font: #{$primary-font};
+  --secondary-font: #{$secondary-font};
+  --tertiary-font: #{$tertiary-font};
+  // ... altri font
+  
+  // Breakpoints
+  --mobile: 480px;
+  --tablet: 768px;
+  --desktop: 1024px;
+  
+  // Z-index
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-modal: 1030;
+  --z-popover: 1040;
+  --z-tooltip: 1050;
+  
+  // Aggiungi le variabili CSS per i font monospace
+  --code-font-primary: #{$code-font-primary};
+  --code-font-secondary: #{$code-font-secondary};
+}
+
+// Stili base globali
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--primary-font);
+  line-height: 1.6;
+  color: #333;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
