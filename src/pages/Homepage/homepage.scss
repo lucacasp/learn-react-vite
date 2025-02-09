@@ -24,6 +24,7 @@
   .grid-image{
     border-radius: 5px;
     transition: all 0.3s ease;
+    cursor: pointer;
     &:hover{
         transform: scale(1.01);
     }
@@ -41,4 +42,11 @@
         text-decoration: none;
         color: var(--color-primary);
     }
+  }
+
+  .loading {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2em;
+    color: #666;
   }
