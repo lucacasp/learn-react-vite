@@ -43,7 +43,9 @@ const Homepage = () => {
             </Masonry>
 
             <div className="latest-works">
-                <Link to="/latest-works">Ultimi lavori</Link>
+                <Link to="/latest-works">
+                    <p>Ultimi lavori</p>
+                </Link>
             </div>
         </div>
        

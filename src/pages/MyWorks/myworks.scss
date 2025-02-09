@@ -1,49 +1,85 @@
-.container-myworks-title {
-    h1 {
-        font-family: var(--code-font-primary);
-        font-weight: 400;
-        border: 10px solid var(--tertiary-color);
-        z-index: 100;
-        font-size: 2rem;
-        color: var(--color-primary);
+.container-myworks {
+    padding: 2rem;
+    
+    .container-myworks-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        
+        h1 {
+            font-family: var(--code-font-primary);
+        }
     }
 }
 
-.image-container {
-  position: relative;
-  display: block;
-  overflow: hidden;
+.carousel-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
 
-  .grid-image {
-    width: 100%;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .image-overlay {
-    position: absolute;
-    bottom: -100%;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 30px;
-    transition: bottom 0.3s ease;
-
-    h3 {
-      color: white;
-      margin: 0;
-      font-size: 1.1rem;
-      text-align: center;
-    }
-  }
-
-  &:hover {
-    .image-overlay {
-      bottom: 0;
-    }
+.carousel-item {
+    padding: 0 10px;
     
-    .grid-image {
-      transform: scale(1.05);
+    .image-container {
+        position: relative;
+        height: 600px;
+        overflow: hidden;
+        border-radius: 8px;
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            
+            h3 {
+                margin: 0;
+                font-size: 1.5rem;
+            }
+            
+            p {
+                margin: 10px 0 0;
+                font-size: 1rem;
+            }
+        }
+        
+        &:hover {
+            img {
+                transform: scale(1.05);
+            }
+            
+            .image-overlay {
+                transform: translateY(0);
+            }
+        }
     }
-  }
+}
+
+.custom-dot-list-style {
+    li {
+        button {
+            border: none;
+            background: #ddd;
+            
+            &:before {
+                background: #666;
+            }
+        }
+        
+        &.react-multi-carousel-dot--active button {
+            background: #333;
+        }
+    }
 }

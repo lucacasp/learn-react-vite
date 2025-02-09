@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form'
+import emailjs from '@emailjs/browser'
 import './ContactPage.scss'
 import renato_2 from '../../../common/temporary_assets/Soggetto_2.png'
 type FormInputs = {
@@ -9,12 +10,24 @@ type FormInputs = {
 }
 
 const ContactPage = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<FormInputs>()
+    const form = useRef<HTMLFormElement>(null)
 
     const onSubmit = (data: FormInputs) => {
-        console.log(data)
-        // dove lo posso mandare questo form?
-        
+        // Sostituisci questi valori con i tuoi ID di EmailJS
+        emailjs.sendForm(
+            'IL_TUO_SERVICE_ID',
+            'IL_TUO_TEMPLATE_ID',
+            form.current!,
+            'LA_TUA_PUBLIC_KEY'
+        )
+        .then((result) => {
+            console.log('Email inviata con successo:', result.text)
+            reset() // Resetta il form dopo l'invio
+        })
+        .catch((error) => {
+            console.error('Errore nell\'invio dell\'email:', error.text)
+        })
     }
 
     return (
@@ -27,7 +40,7 @@ const ContactPage = () => {
                         </div>
                         <img src={renato_2} alt="logo" />
                 </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form ref={form} onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group">
                         <label htmlFor="nome">Nome</label>
                         <input 
