@@ -1,5 +1,6 @@
 @import '../../../common/css//scss/forms/form-buttons';
 
+
 .form-container {
     display: flex;
 
@@ -8,42 +9,7 @@
     }
 }
 
-.form-container-side {
-    width: 50%;
-    height: 100%;
-    position: relative;
-    & img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
 
-        @media (max-width: 768px) {
-            display: none;
-        }
-    }
-
-    & .form-container-side-title {
-        font-family: var(--code-font-primary);
-        font-size: 2rem;
-        font-weight: 700;
-        font-style: italic;
-        border: 10px solid var(--tertiary-color);
-        z-index: 100;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    & h1 {
-        color: var(--tertiary-color);
-        margin: 2rem;
-
-        @media (max-width: 768px) {
-            display: none;
-        }
-    }
-}
 
 form {
     margin-left: 2rem;
@@ -59,4 +25,32 @@ form {
     }
 }
 
+.contact-page-infos {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: START;
+    width: 50%;
+    margin-top: 4rem;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+}
+
+.contact-page-infos-title {
+    font-family: var(--code-font-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    
+    & p {
+        margin: 0;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+        font-weight: 500;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+    }
+}
 

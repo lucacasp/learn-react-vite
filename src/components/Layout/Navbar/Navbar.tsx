@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './navbar.scss'
 import { Link } from 'react-router-dom'
 import { RxHamburgerMenu } from "react-icons/rx";
-
+import { FaInstagram } from "react-icons/fa";
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -23,6 +23,10 @@ const Navbar = () => {
                 <Link to="/" onClick={closeMenu}>Home</Link>
                 <Link to="/about" onClick={closeMenu}>About</Link>
                 <Link to="/contact" onClick={closeMenu}>Contact</Link>
+                <Link to="https://www.instagram.com/" onClick={closeMenu}>
+                    <FaInstagram />
+                </Link>
+                
             </div>
         </div>
     )

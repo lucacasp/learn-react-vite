@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import emailjs from '@emailjs/browser'
 import './ContactPage.scss'
-import renato_2 from '../../../common/temporary_assets/Soggetto_2.png'
+import renato_2 from '../../../common/temporary_assets/renato_3.png'
 import { FaInstagram, FaFacebook, FaLinkedin } from 'react-icons/fa'
 type FormInputs = {
     nome: string
@@ -16,49 +16,50 @@ const ContactPage = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
-    const onSubmit = (data: FormInputs) => {
-        setIsSubmitting(true)
-        setSubmitStatus('idle')
-        
-        const templateParams = {
-            from_name: data.nome,
-            from_email: data.email,
-            message: data.messaggio,
-            to_name: 'Renato',
-            reply_to: data.email,
-            to_email: 'bobyesone@gmail.com'
-        }
-        
-        emailjs.send(
-            'service_s2wbim4',
-            'template_f8yfyeg',
-            templateParams,
-            'gv7ugeSJdtBl5oGXJ'
-        )
-        .then((result) => {
+    const onSubmit = async (data: FormInputs) => {
+        try {
+            setIsSubmitting(true)
+            setSubmitStatus('idle')
+            
+            const templateParams = {
+                from_name: data.nome,
+                from_email: data.email,
+                message: data.messaggio,
+                to_name: 'Renato',
+                reply_to: data.email,
+                to_email: 'bobyesone@gmail.com'
+            }
+            
+            const result = await emailjs.send(
+                'service_s2wbim4',
+                'template_f8yfyeg',
+                templateParams,
+                'gv7ugeSJdtBl5oGXJ'
+            )
+            
             console.log('Email inviata con successo:', result.text)
             setSubmitStatus('success')
             reset()
-        })
-        .catch((error) => {
-            console.error('Errore nell\'invio dell\'email:', error.text)
+        } catch (error) {
+            console.error('Errore nell\'invio dell\'email:', error)
             setSubmitStatus('error')
-        })
-        .finally(() => {
+        } finally {
             setIsSubmitting(false)
-        })
+        }
     }
 
     return (
         <div className="contact-page">
-            {/* <h1>Contattami</h1> */}
             <div className='form-container'>
-                <div className='form-container-side'>
-                        <div className='form-container-side-title'>
-                            <h1>Contattami</h1>
-                        </div>
-                        <img src={renato_2} alt="logo" />
+                <div className='contact-page-infos'>
+                <div className='contact-page-infos-title'>
+                    <p>INSTAGRAM - @xxx </p>
+                    <p>EMAIL - bobyesone@gmail.com</p>
+                    <p>TELEFONO - +39 333 3333333</p>
+                    <p>CITTA' - Napoli, Italia</p>
                 </div>
+                
+            </div>
                 <form ref={form} onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group">
                         <label htmlFor="nome">Nome</label>
@@ -102,22 +103,9 @@ const ContactPage = () => {
                 </button>
             </form>
             </div>
-            <div className="form-container-socials">
-                <div className="form-container-socials-title">
-                <h2>Seguimi:</h2>
-                <div className="social-links">
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                    <FaInstagram />
-                    </a>
-                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                    <FaFacebook />
-                    </a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                    <FaLinkedin />
-                    </a>
-                </div>
-                </div>
-            </div>
+        
+            
+            
         </div>
     )
 }

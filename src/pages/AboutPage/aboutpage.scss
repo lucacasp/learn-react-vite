@@ -28,3 +28,27 @@
 
     }
 }
+
+@media screen and (max-width: 768px) {
+  .container-photo {
+    width: 100%;
+    height: auto;
+  }
+
+  .container-aboutpage {
+    flex-direction: column;
+    padding: 20px;
+
+    .container-text {
+      position: static;
+      top: 0;
+      left: 0;
+      padding: 20px;
+      text-align: center;
+
+      h1 {
+        font-size: 18px;
+      }
+    }
+  }
+}

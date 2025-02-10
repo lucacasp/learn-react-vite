@@ -3,7 +3,6 @@ import { Routes, Route, Outlet } from 'react-router-dom'
 import Homepage from '../../src/pages/Homepage/Homepage'
 import AboutPage from '../../src/pages/AboutPage/AboutPage'
 import ContactPage from '../../src/pages/ContactPage/ContactPage'
-import SinglePage from '../../src/pages/Homepage/SinglePage/SinglePage'
 import Layout from '../../src/components/Layout/Layout'
 import MyWorks from '../../src/pages/MyWorks/MyWorks'
 
@@ -22,11 +21,6 @@ const PAGES = [
         name: 'Contact',
         path: '/contact',
         component: <ContactPage />
-    },
-    {
-        name: 'Image',
-        path: '/image/:imageId',
-        component: <SinglePage />
     },
     {
         name: 'Latest Works',

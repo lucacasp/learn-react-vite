@@ -1,35 +1,21 @@
 import { Link } from 'react-router-dom'
 import './homepage.scss'
-import Masonry from 'react-masonry-css'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const Homepage = () => {
     const allImages = [
-        { id: '237', alt: 'Immagine 1', height: 300 },
-        { id: '238', alt: 'Immagine 2', height: 1000 },
-        { id: '239', alt: 'Immagine 3', height: 350 },
-        { id: '240', alt: 'Immagine 4', height: 1300 },
-        { id: '241', alt: 'Immagine 5', height: 800 },
-        { id: '242', alt: 'Immagine 6', height: 500 },
-        { id: '243', alt: 'Immagine 7', height: 900 },
-        { id: '244', alt: 'Immagine 8', height: 400 },
-        { id: '845', alt: 'Immagine 9', height: 700 },
-        { id: '399', alt: 'Immagine 10', height: 420 },
-        { id: '400', alt: 'Immagine 11', height: 300 },
-        { id: '401', alt: 'Immagine 12', height: 380 },
-        { id: '402', alt: 'Immagine 13', height: 300 },
-        { id: '403', alt: 'Immagine 14', height: 300 },
-        { id: '404', alt: 'Immagine 15', height: 300 },
-        { id: '405', alt: 'Immagine 16', height: 800 },
-        { id: '406', alt: 'Immagine 17', height: 300 },
-        { id: '407', alt: 'Immagine 18', height: 300 },
-        { id: '408', alt: 'Immagine 19', height: 800 },
-        { id: '409', alt: 'Immagine 20', height: 1200 },
-        { id: '410', alt: 'Immagine 21', height: 1200 },
-        { id: '411', alt: 'Immagine 22', height: 300 },
-        { id: '412', alt: 'Immagine 23', height: 300 },
-        { id: '413', alt: 'Immagine 24', height: 300 },
+        { id: '237', alt: 'Immagine 1', height: 800, fullWidth: true },
+        { id: '238', alt: 'Immagine 2', height: 1200, fullWidth: false },
+        { id: '239', alt: 'Immagine 3', height: 1200, fullWidth: false },
+        { id: '240', alt: 'Immagine 4', height: 800, fullWidth: true },
+        { id: '241', alt: 'Immagine 5', height: 1200, fullWidth: false },
+        { id: '242', alt: 'Immagine 6', height: 1200, fullWidth: false },
+        { id: '243', alt: 'Immagine 7', height: 800, fullWidth: true },
+        { id: '244', alt: 'Immagine 8', height: 1200, fullWidth: false },
+        { id: '247', alt: 'Immagine 11', height: 1200, fullWidth: false },
+        { id: '248', alt: 'Immagine 12', height: 1200, fullWidth: false },
+        
 
     ]
 
@@ -66,39 +52,33 @@ const Homepage = () => {
     };
 
     return (
-        <>
-        <div>
-            <Masonry
-                breakpointCols={{
-                    default: 3,
-                    1100: 3,
-                    700: 2,
-                    500: 1
-                }}
-                className="my-masonry-grid"
-                columnClassName="my-masonry-grid_column"
-            >
+        <div className="homepage-container">
+            <div className="images-grid">
                 {visibleImages.map((image, index) => (
                     <motion.div
                         key={index}
+                        className={`image-wrapper ${image.fullWidth ? 'full-width' : 'half-width'}`}
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ 
                             duration: 0.5,
-                            delay: index % 3 * 0.1 // crea un effetto a cascata
+                            delay: index * 0.1
                         }}
                     >
-                        <Link to={`/image/${image.id}`}>
+                        <div 
+                            className="image-container" 
+                            onClick={() => window.location.href = `/image/${image.id}`}
+                        >
                             <img 
-                                src={`https://picsum.photos/id/${image.id}/600/${image.height}`} 
+                                src={`https://picsum.photos/id/${image.id}/1200/${image.height}`} 
                                 alt={image.alt}
                                 className="grid-image" 
                             />
-                        </Link>
+                        </div>
                     </motion.div>
                 ))}
-            </Masonry>
+            </div>
 
             {loading && (
                 <motion.div 
@@ -132,7 +112,6 @@ const Homepage = () => {
                 </Link>
             </motion.div>
         </div>
-        </>
     )
 }
 

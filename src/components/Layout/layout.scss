@@ -1,0 +1,26 @@
+.layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    
+    .main-content {
+        flex: 1;
+        margin-left: 250px; // Corrisponde alla larghezza della navbar
+        min-height: 100vh;
+        width: calc(100% - 250px);
+        padding: 20px;
+    }
+}
+
+// Media query per dispositivi mobili
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+        
+        .main-content {
+            margin-left: 0;
+            width: 100%;
+            margin-top: 60px; // Spazio per la navbar mobile
+        }
+    }
+} 
