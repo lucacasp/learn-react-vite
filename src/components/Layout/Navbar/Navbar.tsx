@@ -21,7 +21,7 @@ const Navbar = () => {
             </div>
             <div className={`nav-links ${isOpen ? 'active' : ''}`}>
                 <h1 className='navbar-title'>
-                    <Link to="/">Renato Camera</Link>
+                    Renato Camera
                 </h1>
                 <Link to="/" onClick={closeMenu}>Home</Link>
                 <Link to="/about" onClick={closeMenu}>About</Link>

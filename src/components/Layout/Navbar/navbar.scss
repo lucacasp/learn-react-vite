@@ -1,3 +1,5 @@
+@import '../../../../common/css/global/global';
+
 * {
     margin: 0;
     padding: 0;
@@ -26,10 +28,8 @@
         align-items: start;
         justify-content: start;
 
-        h1 {
-            font-family: var(--code-font-primary);
-            
-        }
+        font-family: var(--code-font-tertiary);
+
     }
     
     .nav-links {
@@ -66,17 +66,33 @@
         width: 100%;
         height: auto;
         padding: 1rem;
+        flex-direction: column;
+        position: relative;
         
         .nav-links {
             display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            padding: 1rem;
             
             &.active {
                 display: flex;
+            }
+
+            a {
+                width: 100%;
+                padding: 0.5rem;
             }
         }
 
         .hamburger-menu {
             display: block;
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
         }
     }
 }
