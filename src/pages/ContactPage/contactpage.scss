@@ -32,6 +32,7 @@ form {
     justify-content: START;
     width: 50%;
     margin-top: 4rem;
+    margin-left: 2rem;
 
     @media (max-width: 768px) {
         width: 100%;
@@ -39,7 +40,7 @@ form {
 }
 
 .contact-page-infos-title {
-    font-family: var(--code-font-secondary);
+    font-family: var(--code-font-primary);
     font-size: 1rem;
     font-weight: 500;
     

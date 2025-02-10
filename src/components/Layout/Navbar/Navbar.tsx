@@ -20,6 +20,9 @@ const Navbar = () => {
                 <RxHamburgerMenu />
             </div>
             <div className={`nav-links ${isOpen ? 'active' : ''}`}>
+                <h1 className='navbar-title'>
+                    <Link to="/">Renato Camera</Link>
+                </h1>
                 <Link to="/" onClick={closeMenu}>Home</Link>
                 <Link to="/about" onClick={closeMenu}>About</Link>
                 <Link to="/contact" onClick={closeMenu}>Contact</Link>

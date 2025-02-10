@@ -18,7 +18,7 @@ function Layout({ children }: LayoutProps) {
                 <Outlet />
             </div>
 
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }

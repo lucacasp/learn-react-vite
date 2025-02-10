@@ -10,12 +10,27 @@
     left: 0;
     top: 0;
     height: 100vh;
-    width: 250px;
+    width: 300px;
     background-color: #fff;
     padding: 2rem;
     z-index: 1000;
     display: flex;
     justify-content: center;
+
+    .navbar-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+
+        h1 {
+            font-family: var(--code-font-primary);
+            
+        }
+    }
     
     .nav-links {
         display: flex;
@@ -23,7 +38,7 @@
         gap: 2rem;
         margin-top: 3rem;
         width: 100%;
-        align-items: center;
+        align-items: start;
 
         a {
             text-decoration: none;

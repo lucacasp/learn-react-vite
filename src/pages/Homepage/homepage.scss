@@ -14,6 +14,12 @@
         flex-wrap: wrap;
         gap: 2rem;
         padding-left: 10rem;
+        margin-left: 2rem;
+
+        @media (max-width: 768px) {
+            padding-left: 0;
+            margin-left: 0;
+        }
         .image-wrapper {
             &.full-width {
                 width: 100%;
