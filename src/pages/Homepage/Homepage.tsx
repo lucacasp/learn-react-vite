@@ -1,14 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import './homepage.scss'
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Modal from '../../components/Modal/Modal'
+import _ from 'lodash'
+import { PhotoSwipe } from 'react-photoswipe-gallery'
+import 'photoswipe/dist/photoswipe.css'
+import { useInView } from 'react-intersection-observer'
+
+interface ImageType {
+    id: string;
+    alt: string;
+    className: string;
+    fullWidth: boolean;
+    layout: 'full' | 'half';
+    url: string;
+    blurUrl?: string; // URL per l'immagine blur/placeholder
+}
+
 const Homepage = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [visibleImages, setVisibleImages] = useState<ImageType[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [loadingProgress, setLoadingProgress] = useState(0);
 
-    const allImages = [
+    // Intersection Observer per infinite scroll
+    const { ref, inView } = useInView({
+        threshold: 0.1,
+        triggerOnce: false,
+    });
+
+    // Memorizza allImages per evitare ri-renderizzazioni non necessarie
+    const allImages: ImageType[] = useMemo(() => [
         { id: '1', alt: 'Immagine 1', className: 'height-large', fullWidth: true, layout: 'full', url: 'https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473505/Nancy_art-5_ehlhze.jpg' },
         { id: '2', alt: 'Immagine 2', className: 'height-medium', fullWidth: false, layout: 'half', url: 'https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473505/Nancy_art-2_ntad6o.jpg' },
         { id: '3', alt: 'Immagine 3', className: 'height-medium', fullWidth: true, layout: 'half', url: 'https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473506/Nancy_art-6_civpql.jpg' },
@@ -26,11 +51,9 @@ const Homepage = () => {
         { id: '15', alt: 'Immagine 15', className: 'height-medium', fullWidth: true, layout: 'half', url: 'https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473506/Gaia-4_nsq2qb.jpg' },
         { id: '16', alt: 'Immagine 17', className: 'height-medium', fullWidth: true, layout: 'half', url: 'https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473512/THORE-66_yl3acj.jpg' },
         { id: '17', alt: 'Immagine 16', className: 'height-medium', fullWidth: true, layout: 'half', url: 'https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473507/06082023-DSC09490_zsb8q7.jpg' },
-    ]
+    ], []);
 
-    const [visibleImages, setVisibleImages] = useState(allImages.slice(0, 7));
-    const [loading, setLoading] = useState(false);
-
+    // Gestione modale iniziale
     useEffect(() => {
         const hasSeenModal = localStorage.getItem('hasSeenModal');
         if (!hasSeenModal) {
@@ -39,35 +62,78 @@ const Homepage = () => {
         }
     }, []);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (loading) return;
-            if (visibleImages.length >= allImages.length) return;
-            
-            if (window.innerHeight + document.documentElement.scrollTop + 100 >= document.documentElement.offsetHeight) {
-                loadMoreImages();
+    // Caricamento immagini ottimizzato
+    const loadMoreImages = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+
+            const nextIndex = visibleImages.length;
+            if (nextIndex >= allImages.length) {
+                setLoading(false);
+                return;
             }
-        };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [visibleImages, loading, allImages.length]);
-
-    const loadMoreImages = () => {
-        setLoading(true);
-        setTimeout(() => {
-            const nextImages = allImages.slice(
-                visibleImages.length,
-                visibleImages.length + 7
+            const nextImages = allImages.slice(nextIndex, nextIndex + 7);
+            const newImages = nextImages.filter(newImg => 
+                !visibleImages.some(visImg => visImg.id === newImg.id)
             );
-            setVisibleImages(prev => [...prev, ...nextImages]);
+
+            // Simula il caricamento progressivo
+            for (let i = 0; i <= 100; i += 20) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                setLoadingProgress(i);
+            }
+
+            setVisibleImages(prev => [...prev, ...newImages]);
+        } catch (err) {
+            setError('Errore nel caricamento delle immagini');
+            console.error('Errore:', err);
+        } finally {
             setLoading(false);
-        }, 500);
+            setLoadingProgress(0);
+        }
     };
 
+    // Gestione scroll infinito
+    useEffect(() => {
+        if (inView && !loading && visibleImages.length < allImages.length) {
+            loadMoreImages();
+        }
+    }, [inView, loading]);
+
+    // Componente immagine ottimizzato
+    const ImageComponent = React.memo(({ image }: { image: ImageType }) => (
+        <motion.div
+            className={`image-wrapper ${image.layout === 'half' ? 'half-width' : 'full-width'}`}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+        >
+            <div className="image-container">
+                <img 
+                    src={image.url}
+                    alt={image.alt}
+                    className={`grid-image ${image.className}`}
+                    loading="lazy"
+                    srcSet={`
+                        ${image.url} 300w,
+                        ${image.url} 600w,
+                        ${image.url} 900w
+                    `}
+                    sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+                    onError={(e) => {
+                        e.currentTarget.src = 'placeholder.jpg'; // Aggiungi un'immagine placeholder
+                    }}
+                />
+            </div>
+        </motion.div>
+    ));
+
     const renderImages = () => {
-        let halfWidthBuffer = [];
-        const renderedContent = [];
+        let halfWidthBuffer: ImageType[] = [];
+        const renderedContent: JSX.Element[] = [];
 
         visibleImages.forEach((image, index) => {
             if (image.layout === 'half') {
@@ -76,101 +142,32 @@ const Homepage = () => {
                     renderedContent.push(
                         <div key={`half-pair-${index}`} className="half-width-container">
                             {halfWidthBuffer.map((halfImage) => (
-                                <motion.div
-                                    key={`image-${halfImage.id}`}
-                                    className="image-wrapper half-width"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5 }}
-                                >
-                                    <div className="image-container">
-                                        <img 
-                                            src={halfImage.url} 
-                                            alt={halfImage.alt}
-                                            className={`grid-image ${halfImage.className}`}
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                </motion.div>
+                                <ImageComponent key={`image-${halfImage.id}`} image={halfImage} />
                             ))}
                         </div>
                     );
                     halfWidthBuffer = [];
                 }
             } else {
-                // Se c'è un'immagine half non accoppiata, renderizzala comunque
                 if (halfWidthBuffer.length > 0) {
                     renderedContent.push(
                         <div key={`half-single-${index}`} className="half-width-container">
                             {halfWidthBuffer.map((halfImage) => (
-                                <motion.div
-                                    key={`image-${halfImage.id}`}
-                                    className="image-wrapper half-width"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5 }}
-                                >
-                                    <div className="image-container">
-                                        <img 
-                                            src={halfImage.url} 
-                                            alt={halfImage.alt}
-                                            className={`grid-image ${halfImage.className}`}
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                </motion.div>
+                                <ImageComponent key={`image-${halfImage.id}`} image={halfImage} />
                             ))}
                         </div>
                     );
                     halfWidthBuffer = [];
                 }
-
-                renderedContent.push(
-                    <motion.div
-                        key={`image-${image.id}`}
-                        className="image-wrapper full-width"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <div className="image-container">
-                            <img 
-                                src={image.url} 
-                                alt={image.alt}
-                                className={`grid-image ${image.className}`}
-                                loading="lazy"
-                            />
-                        </div>
-                    </motion.div>
-                );
+                renderedContent.push(<ImageComponent key={`image-${image.id}`} image={image} />);
             }
         });
 
-        // Gestisce eventuali immagini half rimanenti alla fine
         if (halfWidthBuffer.length > 0) {
             renderedContent.push(
                 <div key="half-final" className="half-width-container">
                     {halfWidthBuffer.map((halfImage) => (
-                        <motion.div
-                            key={`image-${halfImage.id}`}
-                            className="image-wrapper half-width"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <div className="image-container">
-                                <img 
-                                    src={halfImage.url} 
-                                    alt={halfImage.alt}
-                                    className={`grid-image ${halfImage.className}`}
-                                    loading="lazy"
-                                />
-                            </div>
-                        </motion.div>
+                        <ImageComponent key={`image-${halfImage.id}`} image={halfImage} />
                     ))}
                 </div>
             );
@@ -181,49 +178,52 @@ const Homepage = () => {
 
     return (
         <>
-        <Modal 
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-        />
-        <div className="homepage-container">
-            <div className="images-grid">
-                {renderImages()}
-            </div>
+            <Modal 
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+            />
+            <PhotoSwipe>
+                <div className="homepage-container">
+                    <div className="images-grid">
+                        {renderImages()}
+                    </div>
 
-            {loading && (
-                <motion.div 
-                    className="loading"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                >
-                    Caricamento...
-                </motion.div>
-            )}
+                    <AnimatePresence>
+                        {loading && (
+                            <motion.div 
+                                className="loading-container"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                            >
+                                <div className="loading-bar">
+                                    <div 
+                                        className="loading-progress"
+                                        style={{ width: `${loadingProgress}%` }}
+                                    />
+                                </div>
+                                <p>Caricamento... {loadingProgress}%</p>
+                            </motion.div>
+                        )}
 
-            {visibleImages.length >= allImages.length && (
-                <motion.div 
-                    className="no-more-images"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                >
-                </motion.div>
-            )}
+                        {error && (
+                            <motion.div 
+                                className="error-message"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                            >
+                                {error}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
 
-            {/* <motion.div 
-                className="latest-works"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-            >
-                <Link to="/latest-works">
-                    <p>Ultimi lavori</p>
-                </Link>
-            </motion.div> */}
-        </div>
+                    {/* Elemento di riferimento per infinite scroll */}
+                    <div ref={ref} style={{ height: '20px', margin: '20px 0' }} />
+                </div>
+            </PhotoSwipe>
         </>
     )
 }
 
-export default Homepage
+export default React.memo(Homepage)
