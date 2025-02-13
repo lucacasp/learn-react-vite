@@ -49,8 +49,8 @@ const Homepage = () => {
         { id: '13', alt: 'Immagine 13', className: 'height-medium', fullWidth: true, layout: 'half', url: 'https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473508/Red_Chiara_pnnw9s.jpg' },
         { id: '14', alt: 'Immagine 14', className: 'height-medium', fullWidth: true, layout: 'half', url: 'https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473508/REN01599_mlo85y.jpg' },
         { id: '15', alt: 'Immagine 15', className: 'height-medium', fullWidth: true, layout: 'half', url: 'https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473506/Gaia-4_nsq2qb.jpg' },
-        { id: '16', alt: 'Immagine 17', className: 'height-medium', fullWidth: true, layout: 'half', url: 'https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473512/THORE-66_yl3acj.jpg' },
-        { id: '17', alt: 'Immagine 16', className: 'height-medium', fullWidth: true, layout: 'half', url: 'https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473507/06082023-DSC09490_zsb8q7.jpg' },
+        { id: '16', alt: 'Immagine 16', className: 'height-medium', fullWidth: true, layout: 'half', url: 'https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473512/THORE-66_yl3acj.jpg' },
+        { id: '17', alt: 'Immagine 17', className: 'height-medium', fullWidth: true, layout: 'full', url: 'https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473507/06082023-DSC09490_zsb8q7.jpg' },
     ], []);
 
     // Gestione modale iniziale
