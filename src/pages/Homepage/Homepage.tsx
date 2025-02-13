@@ -4,7 +4,7 @@ import './homepage.scss'
 import { motion, AnimatePresence } from 'framer-motion'
 import Modal from '../../components/Modal/Modal'
 import _ from 'lodash'
-import { PhotoSwipe } from 'react-photoswipe-gallery'
+import { Gallery } from 'react-photoswipe-gallery'
 import 'photoswipe/dist/photoswipe.css'
 import { useInView } from 'react-intersection-observer'
 
@@ -182,7 +182,7 @@ const Homepage = () => {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
             />
-            <PhotoSwipe>
+            <Gallery>
                 <div className="homepage-container">
                     <div className="images-grid">
                         {renderImages()}
@@ -221,7 +221,7 @@ const Homepage = () => {
                     {/* Elemento di riferimento per infinite scroll */}
                     <div ref={ref} style={{ height: '20px', margin: '20px 0' }} />
                 </div>
-            </PhotoSwipe>
+            </Gallery>
         </>
     )
 }
