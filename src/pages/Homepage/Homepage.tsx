@@ -133,7 +133,7 @@ const Homepage = () => {
 
     const renderImages = () => {
         let halfWidthBuffer: ImageType[] = [];
-        const renderedContent: JSX.Element[] = [];
+        const renderedContent: React.ReactElement[] = [];
 
         visibleImages.forEach((image, index) => {
             if (image.layout === 'half') {
