@@ -154,12 +154,20 @@
 
 .half-width-container {
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
-
+    gap: 10px;
     
-    .image-wrapper.half-width {
-        flex: 1;
-        margin: 0;
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+.image-wrapper {
+    &.half-width {
+        width: 50%;
+        
+        @media (max-width: 768px) {
+            width: 100%;
+        }
     }
 }
