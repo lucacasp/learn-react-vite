@@ -1,0 +1,34 @@
+@import '../../../common/css/components/buttons.scss';
+@import '../../../common/css/global/global.scss';
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+    background-color: #e4e2e2 !important;
+}
+
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+    opacity: 0;
+}
+
+.modal-title {
+    font-family: var(--code-font-secondary);
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.modal-description {
+    font-family: var(--code-font-secondary);
+    margin-bottom: 2rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.btn:hover {
+    background-color: #333;
+    color: #fff;
+}

@@ -15,6 +15,7 @@ const ContactPage = () => {
     const form = useRef<HTMLFormElement>(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+    const [showModal, setShowModal] = useState(false)
 
     const onSubmit = async (data: FormInputs) => {
         try {
@@ -38,6 +39,7 @@ const ContactPage = () => {
             )
             
             console.log('Email inviata con successo:', result.text)
+            setShowModal(true)
             setSubmitStatus('success')
             reset()
         } catch (error) {
@@ -48,14 +50,18 @@ const ContactPage = () => {
         }
     }
 
+    const closeModal = () => {
+        setShowModal(false)
+    }
+
     return (
         <div className="contact-page">
             <div className='form-container'>
                 <div className='contact-page-infos'>
                 <div className='contact-page-infos-title'>
-                    <p>INSTAGRAM - @xxx </p>
-                    <p>EMAIL - bobyesone@gmail.com</p>
-                    <p>TELEFONO - +39 333 3333333</p>
+                    <p>INSTAGRAM - @beeroomagency </p>
+                    <p>EMAIL - beeroomagency@gmail.com</p>
+                    <p>TELEFONO - +39 ___</p>
                     <p>CITTA' - Napoli, Italia</p>
                 </div>
                 
@@ -104,8 +110,15 @@ const ContactPage = () => {
             </form>
             </div>
         
-            
-            
+            {showModal && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <h3>Email Inviata!</h3>
+                        <p>La tua email è stata inviata con successo.</p>
+                        <button className='btn' onClick={closeModal}>Chiudi</button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

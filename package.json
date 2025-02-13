@@ -19,6 +19,7 @@
     "react-hook-form": "^7.54.2",
     "react-icons": "^5.4.0",
     "react-masonry-css": "^1.0.16",
+    "react-modal": "^3.16.3",
     "react-multi-carousel": "^2.8.5",
     "react-router-dom": "^7.1.5"
   },
