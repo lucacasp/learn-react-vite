@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import emailjs from '@emailjs/browser'
-import './ContactPage.scss'
+import './contactpage.scss'
 import renato_2 from '../../../common/temporary_assets/renato_3.png'
 import { FaInstagram, FaFacebook, FaLinkedin } from 'react-icons/fa'
 type FormInputs = {
