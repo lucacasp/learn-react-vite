@@ -24,13 +24,13 @@ $nonary-font: 'Bookman', Bookman L, serif;
 $denary-font: 'Comic Sans MS', Comic Sans, sans-serif;
 
 // Importa tutti i file partial
-@import 'mixins';
-@import 'reset';
-@import 'animations';
-@import 'utilities';
+@use 'mixins';
+@use 'reset';
+@use 'animations';
+@use 'utilities';
 
 // Importa i layout
-@import '../layouts/grid';
+@use '../layouts/grid';
 @import '../layouts/containers';
 @import '../layouts/spacing';
 
