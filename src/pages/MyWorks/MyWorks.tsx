@@ -1,3 +1,11 @@
+/* TO BE DEFINED */
+/* WORK IN PROGRESS */
+/* TO BE DEFINED */
+
+
+/* PRENDERE NUOVE REFERENCES */
+
+
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Link } from 'react-router-dom';

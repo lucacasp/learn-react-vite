@@ -61,8 +61,8 @@ const ContactPage = () => {
                 <div className='contact-page-infos-title'>
                     <p>INSTAGRAM - @beeroomagency </p>
                     <p>EMAIL - beeroomagency@gmail.com</p>
-                    <p>TELEFONO - +39 ___</p>
-                    <p>CITTA' - Napoli, Italia</p>
+                    <p>PHONE NUMBER - +39 3383041402</p>
+                    <p>CITY - Naples, Italy</p>
                 </div>
                 
             </div>

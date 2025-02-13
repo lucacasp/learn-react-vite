@@ -14,7 +14,7 @@ const AboutPage = () => {
                   ease: "easeOut"
                 }}
               >
-                <img src="https://picsum.photos/500/600" alt="renato" />
+                <img src="https://res.cloudinary.com/dtyxqrcrx/image/upload/v1739473508/IMG_8011_ktqjzl.jpg" alt="renato" />
               </motion.div>
               <motion.div 
                 className='container-text'
@@ -26,8 +26,8 @@ const AboutPage = () => {
                   ease: "easeOut"
                 }}
               >
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+                <p>Renato Camera (b. 1994) is a Naples born cinematographer and photographer.</p>
+                <p>He works all around Italy and he's currently based in Naples.</p>
               </motion.div>
             </div>
         </div>

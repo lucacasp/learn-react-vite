@@ -1,10 +1,15 @@
+@use '../../../common/css/global/global.scss';
 .aboutpage {
   width: 100%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 3rem 10rem;
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 
   .container-aboutpage {
     max-width: 1200px;
@@ -23,20 +28,30 @@
       img {
         width: 100%;
         height: auto;
-        border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-left: 2rem;
+
+        @media (max-width: 768px) {
+          margin-left: 0;
+        }
       }
     }
 
     .container-text {
       flex: 1;
       padding: 1rem;
+      margin-left: 0.5rem;
+
+      @media (max-width: 768px) {
+        margin-left: 0;
+      }
 
       p {
+        font-weight: 700;
         margin-bottom: 1rem;
-        font-size: 1.1rem;
+        font-size: 0.95rem;
         line-height: 1.6;
-        
+        font-family: var(--code-font-secondary);
         @media (max-width: 768px) {
           font-size: 1rem;
         }

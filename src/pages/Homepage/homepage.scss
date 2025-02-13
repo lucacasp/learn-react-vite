@@ -12,9 +12,12 @@
     .images-grid {
         display: flex;
         flex-wrap: wrap;
-        gap: 2rem;
-        padding-left: 10rem;
-        margin-left: 2rem;
+        gap: 1.5rem;
+        padding-left: 5rem;
+        margin-left: 1rem;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
 
         @media (max-width: 768px) {
             padding-left: 0;
@@ -37,9 +40,27 @@
 
                 img {
                     width: 100%;
-                    height: auto;
+                    height: 500px; // altezza di default
                     display: block;
                     transition: transform 0.3s ease;
+                    object-fit: cover;
+                    object-position: center;
+
+                    &.height-small {
+                        height: 200px;
+                    }
+
+                    &.height-medium {
+                        height: 500px;
+                    }
+
+                    &.height-large {
+                        height: 700px;
+                    }
+
+                    &.height-custom {
+                        height: var(--custom-height); // per altezze personalizzate via CSS variables
+                    }
                 }
             }
         }
@@ -104,5 +125,32 @@
                 }
             }
         }
+    }
+}
+
+.small-images-row {
+    display: flex;
+    gap: 20px;
+    
+    .half-width {
+        flex: 1;
+    }
+}
+
+.images-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.half-width-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    
+    .image-wrapper.half-width {
+        flex: 1;
+        margin: 0;
     }
 }
