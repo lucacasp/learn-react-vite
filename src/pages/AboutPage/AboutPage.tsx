@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import './AboutPage.scss'
-import renato from '../../../common/temporary_assets/Soggetto.png'
+import './aboutpage.scss'
         
 const AboutPage = () => {
     return (
