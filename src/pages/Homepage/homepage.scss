@@ -48,14 +48,23 @@
 
                     &.height-small {
                         height: 200px;
+                        @media (max-width: 768px) {
+                            height: 150px;
+                        }
                     }
 
                     &.height-medium {
                         height: 500px;
+                        @media (max-width: 768px) {
+                            height: 300px;
+                        }
                     }
 
                     &.height-large {
                         height: 700px;
+                        @media (max-width: 768px) {
+                            height: 400px;
+                        }
                     }
 
                     &.height-custom {
