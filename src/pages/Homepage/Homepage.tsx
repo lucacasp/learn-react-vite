@@ -40,32 +40,29 @@ const Homepage = () => {
     }, []);
 
     useEffect(() => {
+        const handleScroll = () => {
+            if (loading) return;
+            if (visibleImages.length >= allImages.length) return;
+            
+            if (window.innerHeight + document.documentElement.scrollTop + 100 >= document.documentElement.offsetHeight) {
+                loadMoreImages();
+            }
+        };
+
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [visibleImages, loading]);
-
-    const handleScroll = () => {
-        if (
-            window.innerHeight + document.documentElement.scrollTop + 100 >= document.documentElement.offsetHeight
-        ) {
-            loadMoreImages();
-        }
-    };
+    }, [visibleImages, loading, allImages.length]);
 
     const loadMoreImages = () => {
-        if (loading) return;
-        if (visibleImages.length >= allImages.length) {
-            console.log('Tutte le immagini sono state caricate');
-            return;
-        }
-
         setLoading(true);
-        const nextImages = allImages.slice(
-            visibleImages.length,
-            visibleImages.length + 7
-        );
-        setVisibleImages(prev => [...prev, ...nextImages]);
-        setLoading(false);
+        setTimeout(() => {
+            const nextImages = allImages.slice(
+                visibleImages.length,
+                visibleImages.length + 7
+            );
+            setVisibleImages(prev => [...prev, ...nextImages]);
+            setLoading(false);
+        }, 500);
     };
 
     const renderImages = () => {
